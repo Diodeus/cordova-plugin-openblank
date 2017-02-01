@@ -6,9 +6,7 @@
  to you under the Apache License, Version 2.0 (the
  "License"); you may not use this file except in compliance
  with the License.  You may obtain a copy of the License at
- 
  http://www.apache.org/licenses/LICENSE-2.0
- 
  Unless required by applicable law or agreed to in writing,
  software distributed under the License is distributed on an
  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
@@ -36,14 +34,17 @@
 
 - (BOOL)shouldOverrideLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
-    
+
     NSURL* url = [request URL];
     BOOL allowNavigationsPass = YES;
-    
+
     switch (navigationType) {
         case UIWebViewNavigationTypeLinkClicked:
         {
-            [[UIApplication sharedApplication] openURL:url];
+            // [[UIApplication sharedApplication] openURL:url];
+            // This will execute openLinkInAppBrowser function defined in your javascript 
+            NSString* jsString = [NSString stringWithFormat:@"openLinkInAppBrowser(\"%@\");", url];
+            [self.webView stringByEvaluatingJavaScriptFromString:jsString];
             allowNavigationsPass = NO;
         }
         case UIWebViewNavigationTypeOther:
@@ -56,14 +57,13 @@
             }
         }
       case 4294967295: {
-            if ( [[url.absoluteString lowercaseString] hasPrefix:@"https://twitter.com/"] || ([[url.absoluteString lowercaseString] hasPrefix:@"https://www.instagram.com/"] && ![[url.absoluteString lowercaseString] hasPrefix:@"https://www.instagram.com/p/"]) ){
-                [[UIApplication sharedApplication] openURL:url];
-                allowNavigationsPass = NO;
-            }
+             NSString* jsString = [NSString stringWithFormat:@"openLinkInAppBrowser(\"%@\");", url];
+            [self.webView stringByEvaluatingJavaScriptFromString:jsString];
+            allowNavigationsPass = NO;
         }
-                
+
     }
-    
+
     return allowNavigationsPass;
 }
 
