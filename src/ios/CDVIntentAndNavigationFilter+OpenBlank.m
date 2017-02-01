@@ -37,14 +37,15 @@
 
     NSURL* url = [request URL];
     BOOL allowNavigationsPass = YES;
-
+    // This will execute openLinkInAppBrowser function defined in your javascript 
+    NSString* jsString = [NSString stringWithFormat:@"openLinkInAppBrowser(\"%@\");", url];
+    
     switch (navigationType) {
         case UIWebViewNavigationTypeLinkClicked:
         {
             // [[UIApplication sharedApplication] openURL:url];
-            // This will execute openLinkInAppBrowser function defined in your javascript 
-            NSString* jsString = [NSString stringWithFormat:@"openLinkInAppBrowser(\"%@\");", url];
-            [self.webView stringByEvaluatingJavaScriptFromString:jsString];
+            
+            [self.commandDelegate evalJs:jsString];
             allowNavigationsPass = NO;
         }
         case UIWebViewNavigationTypeOther:
@@ -57,8 +58,7 @@
             }
         }
       case 4294967295: {
-             NSString* jsString = [NSString stringWithFormat:@"openLinkInAppBrowser(\"%@\");", url];
-            [self.webView stringByEvaluatingJavaScriptFromString:jsString];
+            [self.commandDelegate evalJs:jsString];
             allowNavigationsPass = NO;
         }
 
