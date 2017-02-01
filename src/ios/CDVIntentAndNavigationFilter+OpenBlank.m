@@ -56,7 +56,7 @@
             }
         }
       case 4294967295: {
-            if ( [[url.absoluteString lowercaseString] hasPrefix:@"https://www.instagram.com/"] && ![[url.absoluteString lowercaseString] hasPrefix:@"https://www.instagram.com/p/"] ){
+            if ( [[url.absoluteString lowercaseString] hasPrefix:@"https://www.instagram.com/"] || ![[url.absoluteString lowercaseString] hasPrefix:@"https://www.instagram.com/passort2017"] && ![[url.absoluteString lowercaseString] hasPrefix:@"https://www.instagram.com/p/"] ){
                 [[UIApplication sharedApplication] openURL:url];
                 allowNavigationsPass = NO;
             }
