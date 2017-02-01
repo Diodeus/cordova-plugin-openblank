@@ -11,7 +11,7 @@ If you are going to use this you'll need to modify the android file to check for
 
 Not an issue in iOS though, you can check the target.
 
-/****************************/
+////  inappbrowser branch ////
 For opening deep iframe links in InAppBrowser.
 1. You have cordova-plugin-inappbrowser plugin installed in your app
 2. Add following code in your index.html file (Or where ever you like need to be global)
